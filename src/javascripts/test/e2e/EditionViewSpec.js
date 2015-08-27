@@ -22,10 +22,10 @@ describe('EditionView', function () {
                 return $$('button[type="submit"]').first().click();
             })
             .then(function() {
-                return browser.get(browser.baseUrl + '#/comments/list');     
+                return $$('#page-wrapper .btn-default').first().click();
             })
             .then(function() {
-                return browser.get(browser.baseUrl + '#/comments/edit/11');
+                return $$('.ng-admin-column-actions .btn-xs').first().click();
             })
             .then(function() {
                 return $$('.ng-admin-field-author_name input').first();
@@ -73,9 +73,11 @@ describe('EditionView', function () {
         });
 
         it('should redirect to corresponding detail view even for referenced_list entity', function () {
-            $$('#row-comments td a').first().click();
-            browser.getLocationAbsUrl().then(function(url){
-                expect(url).toContain('/comments/edit/');
+            $$('#row-comments td a').first().click()
+            .then(function() {
+                browser.getLocationAbsUrl().then(function(url){
+                    expect(url).toContain('/comments/edit/');
+                });
             });
         });
     });
